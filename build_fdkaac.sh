@@ -54,24 +54,24 @@ for file in `ls $PREFIX/lib`
 do
  if [ -L $PREFIX/lib/$file ]
  then
-    echo $PREFIX/lib/$file" 是软连"
+    echo $PREFIX/lib/$file" 是软连 需移除"
     rm $PREFIX/lib/$file
  else
     echo $PREFIX/lib/$file
  fi
 done
 
-#将带版本号的so 移除版本号
-./patchelf --set-soname libfdk-aac.so $PREFIX/lib/libfdk-aac.so.*
-
+#处理带版本号的so
 if [ -f $PREFIX/lib/libfdk-aac.so ]
 then
-   rm $PREFIX/lib/libfdk-aac.so
+   #不做处理
 else
-   echo $PREFIX/lib/$file
+   echo $PREFIX/lib/libfdk-aac.so.*
+   #将带版本号的so 移除版本号
+   ./patchelf --set-soname libfdk-aac.so $PREFIX/lib/libfdk-aac.so.*
+   #拷贝 libfdk-aac.so.* 为libfdk-aac.so
+   cp $PREFIX/lib/libfdk-aac.so.*  $PREFIX/lib/libfdk-aac.so
 fi
-
-cp $PREFIX/lib/libfdk-aac.so.*  $PREFIX/lib/libfdk-aac.so
+# 移除libfdk-aac.so.*
 rm $PREFIX/lib/libfdk-aac.so.*
-echo "rm $PREFIX/lib/libfdk-aac.so.*"
 echo "==============================================================="

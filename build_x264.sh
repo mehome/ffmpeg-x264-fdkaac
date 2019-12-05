@@ -64,16 +64,16 @@ do
  fi
 done
 
-#将带版本号的so 移除版本号
-./patchelf --set-soname libx264.so $PREFIX/lib/libx264.so.*
-
+#看 libx264.so是否存在
 if [ -f $PREFIX/lib/libx264.so ]
 then
-   rm $PREFIX/lib/libx264.so
+   #不做处理
 else
-   echo $PREFIX/lib/$file
+   echo $PREFIX/lib/libx264.so.*
+   #将带版本号的so 移除版本号
+   ./patchelf --set-soname libx264.so $PREFIX/lib/libx264.so.*
+   cp $PREFIX/lib/libx264.so.*  $PREFIX/lib/libx264.so
 fi
-cp $PREFIX/lib/libx264.so.*  $PREFIX/lib/libx264.so
 rm $PREFIX/lib/libx264.so.*
 echo "rm $PREFIX/lib/libx264.so.*"
 echo "==============================================================="
