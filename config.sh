@@ -108,6 +108,9 @@ case "$THE_ARCH" in
 	;;
 esac
 
+export CFLAGS="-I$ANDROID_NDK_ROOT/sysroot/usr/include"
+export CPPFLAGS="-I$ANDROID_NDK_ROOT/sysroot/usr/include"
+
 echo "TOOLCHAIN_BASE="$TOOLCHAIN_BASE
 echo "TOOLNAME_BASE="$TOOLNAME_BASE
 echo "AOSP_ABI="$AOSP_ABI
