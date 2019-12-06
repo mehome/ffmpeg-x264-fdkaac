@@ -41,7 +41,7 @@ export STRIP="${CROSS_PREFIX}strip"
 --cross-prefix=$CROSS_PREFIX \
 --sysroot=$SYSROOT \
 --extra-cflags="-Os -fpic" \
---extra-ldflags="-Wl,-soname libx264.so"
+--extra-ldflags=""
 
 
 make clean
